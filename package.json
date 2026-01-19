@@ -1,0 +1,34 @@
+{
+  "name": "pkm-asm",
+  "version": "1.0.0",
+  "description": "PKM Asset Management System - CodeIgniter 4 with Bootstrap 5",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "dev": "php spark serve",
+    "watch": "php spark serve --host=0.0.0.0",
+    "migrate": "php spark migrate",
+    "migrate:rollback": "php spark migrate:rollback",
+    "db:seed": "php spark db:seed",
+    "cache:clear": "php spark cache:clear",
+    "route:list": "php spark routes"
+  },
+  "keywords": [
+    "codeigniter",
+    "asset-management",
+    "bootstrap",
+    "php",
+    "postgresql"
+  ],
+  "author": "PKM Team",
+  "license": "MIT",
+  "dependencies": {
+    "datatables.net": "^2.3.6",
+    "datatables.net-bs5": "^2.3.6",
+    "jquery": "^3.7.1",
+    "sweetalert2": "^11.26.17",
+    "toastr": "^2.1.4"
+  }
+}
