@@ -217,12 +217,20 @@
     </div>
 </div>
 
+<?= $this->endSection() ?>
+
+<?= $this->section('scripts') ?>
 <script>
 $(document).ready(function() {
     let table;
     let currentPermohonanId = null;
     let departemenOptions = [];
     let kelompokOptions = [];
+    
+    // Initialize Bootstrap modals
+    const modalForm = new bootstrap.Modal(document.getElementById('modalForm'));
+    const modalDetail = new bootstrap.Modal(document.getElementById('modalDetail'));
+    const modalFormDetail = new bootstrap.Modal(document.getElementById('modalFormDetail'));
 
     // Load options
     loadOptions();
@@ -299,7 +307,7 @@ $(document).ready(function() {
         $('#formPermohonan')[0].reset();
         $('#permohonan_id').val('');
         $('.form-control, .form-select').removeClass('is-invalid');
-        $('#modalForm').modal('show');
+        modalForm.show();
     });
 
     // Form submit
@@ -315,7 +323,7 @@ $(document).ready(function() {
             data: $(this).serialize(),
             success: function(response) {
                 if (response.status === 'success') {
-                    $('#modalForm').modal('hide');
+                    modalForm.hide();
                     table.ajax.reload();
                     toastr.success(response.message);
                 } else {
@@ -345,7 +353,7 @@ $(document).ready(function() {
                     $('#pemohon').val(response.data.pemohon);
                     $('#keterangan_tujuan').val(response.data.keterangan_tujuan);
                     $('.form-control, .form-select').removeClass('is-invalid');
-                    $('#modalForm').modal('show');
+                    modalForm.show();
                 } else {
                     toastr.error(response.message);
                 }
@@ -420,7 +428,7 @@ $(document).ready(function() {
                     // Fill detail table
                     loadDetailTable(data.details || []);
                     
-                    $('#modalDetail').modal('show');
+                    modalDetail.show();
                 } else {
                     toastr.error(response.message);
                 }
@@ -468,7 +476,7 @@ $(document).ready(function() {
         $('#formDetail')[0].reset();
         $('#detail_permohonan_id').val(currentPermohonanId);
         $('.form-control, .form-select').removeClass('is-invalid');
-        $('#modalFormDetail').modal('show');
+        modalFormDetail.show();
     });
 
     // Form detail submit
@@ -481,7 +489,7 @@ $(document).ready(function() {
             data: $(this).serialize(),
             success: function(response) {
                 if (response.status === 'success') {
-                    $('#modalFormDetail').modal('hide');
+                    modalFormDetail.hide();
                     toastr.success(response.message);
                     // Reload detail
                     showDetail(currentPermohonanId);
@@ -534,5 +542,4 @@ $(document).ready(function() {
     };
 });
 </script>
-
 <?= $this->endSection() ?>

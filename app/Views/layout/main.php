@@ -31,3 +31,4 @@
 </main><!-- End #main -->
 
 <?= $this->include('layout/footer') ?>
+<?= $this->renderSection('scripts') ?>

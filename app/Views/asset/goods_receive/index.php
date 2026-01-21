@@ -146,10 +146,18 @@
     </div>
 </div>
 
+<?= $this->endSection() ?>
+
+<?= $this->section('scripts') ?>
+
 <script>
 $(document).ready(function() {
     let table;
     let currentPenerimaanId = null;
+    
+    // Initialize Bootstrap modals
+    const modalForm = new bootstrap.Modal(document.getElementById('modalForm'));
+    const modalDetail = new bootstrap.Modal(document.getElementById('modalDetail'));
 
     // Load options
     loadOptions();
@@ -218,7 +226,7 @@ $(document).ready(function() {
         $('#formPenerimaan')[0].reset();
         $('#penerimaan_id').val('');
         $('.form-control, .form-select').removeClass('is-invalid');
-        $('#modalForm').modal('show');
+        modalForm.show();
     });
 
     $('#formPenerimaan').submit(function(e) {
@@ -233,7 +241,7 @@ $(document).ready(function() {
             data: $(this).serialize(),
             success: function(response) {
                 if (response.status === 'success') {
-                    $('#modalForm').modal('hide');
+                    modalForm.hide();
                     table.ajax.reload();
                     toastr.success(response.message);
                     loadOptions();
@@ -263,7 +271,7 @@ $(document).ready(function() {
                     $('#tanggal_penerimaan').val(response.data.tanggal_penerimaan);
                     $('#keterangan').val(response.data.keterangan);
                     $('.form-control, .form-select').removeClass('is-invalid');
-                    $('#modalForm').modal('show');
+                    modalForm.show();
                 }
             }
         });
@@ -315,7 +323,7 @@ $(document).ready(function() {
                     
                     loadDetailTable(data.details || []);
                     
-                    $('#modalDetail').modal('show');
+                    modalDetail.show();
                 }
             }
         });

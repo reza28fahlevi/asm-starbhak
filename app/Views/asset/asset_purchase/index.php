@@ -232,6 +232,10 @@
     </div>
 </div>
 
+<?= $this->endSection() ?>
+
+<?= $this->section('scripts') ?>
+
 <script>
 $(document).ready(function() {
     let table;
